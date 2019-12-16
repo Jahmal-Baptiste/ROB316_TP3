@@ -4,65 +4,70 @@
 clear all
 figure
 cmap = jet(120);
+pkg load image;
 
 %Define Number of Nodes
 xmax = 80;
 ymax = 20;
 
 %Start and Goal
-start = [10,ymax/2];
-goal  = [xmax,ymax/2-3];
+start = [10,   ymax/2];
+goal  = [xmax, ymax/2-3];
 
 %Nodes
-MAP = zeros(xmax,ymax);
+MAP = zeros(xmax, ymax);
 
 %To define objects, set their MAP(x,y) to inf
-MAP(40,5:15)    = inf;
-MAP(35:40,5)    = inf;
-MAP(35:40,15)   = inf;
-MAP(60:62,1:7)  = inf;
-MAP(60:62,9:12) = inf;
+MAP(40,    5:15) = inf;
+MAP(35:40, 5)    = inf;
+MAP(35:40, 15)   = inf;
+MAP(60:62, 1:7)  = inf;
+MAP(60:62, 9:12) = inf;
 
 
 %To use Random Objects, uncomment this secion
-% NumberOfObjects = 10;
-% k = 0;
-% while (k < NumberOfObjects)
-%     length = max(3,randi(9));
-%     x = randi(xmax-2*length)+length;
-%     y = randi(ymax-2*length)+length;
-%     direction = randi(4);
-%     if (direction == 1)
-%         x = x:x+length;
-%     elseif (direction == 2)
-%         x = x-length:x;
-%     elseif (direction == 3)
-%         y = y:y+length;
-%     elseif (direction == 4)
-%         y = y-length:y;
-%     end
-%     if (sum(isinf(MAP(x,y)))>0)
-%         continue
-%     end
-%     MAP(x,y) = inf;
-%     k = k + 1;
-% end
+NumberOfObjects = 5;
+k = 0;
+while (k < NumberOfObjects)
+    length = max(3,randi(9));
+    x = randi(xmax-2*length)+length;
+    y = randi(ymax-2*length)+length;
+    direction = randi(4);
+    if (direction == 1)
+        x = x:x+length;
+    elseif (direction == 2)
+        x = x-length:x;
+    elseif (direction == 3)
+        y = y:y+length;
+    elseif (direction == 4)
+        y = y-length:y;
+    end
+    if (sum(isinf(MAP(x,y)))>0)
+        continue
+    end
+    MAP(x,y) = inf;
+    k = k + 1;
+end
 
 tic
 %Compute Heuristic for each node%%%%%%%%%%%%%%%%%%%%%%%%%%%
 weight = 0;
+%weight_tab = bwdist(MAP, 'quasi-euclidean');
+
 
 for x = 1:size(MAP,1)
     for y = 1:size(MAP,2)
         if(MAP(x,y)~=inf)
-            H(x,y) = weight*norm(goal-[x,y]);
+            H(x,y) = weight*norm(goal-[x, y]);
+            %H(x,y) = weight./weight_tab(x, y)*norm(goal-[x, y]);
             G(x,y) = inf;
         end
     end
 end
 
 %Set node Traversal cost%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-W = zeros(size(MAP));
+%W = zeros(size(MAP));
+W = 1./bwdist(MAP, 'quasi-euclidean');
 
 
 %Plotting%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,8 +80,8 @@ plot(goal(1),  goal(2),  's', 'MarkerFaceColor', 'm')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %initial conditions%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-G(start(1),start(2)) = 0;
-F(start(1),start(2)) = H(start(1),start(2));
+G(start(1), start(2)) = 0;
+F(start(1), start(2)) = H(start(1), start(2));
 
 closedNodes = [];
 openNodes   = [start G(start(1),start(2)) F(start(1),start(2)) 0]; %[x y G F cameFrom]
@@ -88,19 +93,18 @@ while(~isempty(openNodes))
     
     pause(1e-5)
 
-    
     %find node from open set with smallest F value
-    [A,I] = min(openNodes(:,4));
+    [A,I] = min(openNodes(:, 4));
     
     %set current node
     current = openNodes(I,:);
     color   = cmap(min([round(G(current(1), current(2)))+1 120]), :);
     plot(current(1), current(2), 'o', 'color', color, 'MarkerFaceColor', color)
 
-    %if goal is reached, break the loop
+    %if goal is reached, break the while loop
     if(current(1:2)==goal)
         closedNodes = [closedNodes; current];
-        solved = true;
+        solved      = true;
         break;
     end
     
@@ -123,7 +127,7 @@ while(~isempty(openNodes))
             end
             
             %if current node skip
-            if (x==current(1)&&y==current(2))
+            if (x==current(1) && y==current(2))
                 continue
             end
             
@@ -158,7 +162,7 @@ while(~isempty(openNodes))
             %if not in open set, add to open set
             if(isempty(A))
                 G(x,y)    = newG;
-                newF      = G(x, y) + H(x, y);
+                newF      = G(x,y) + H(x,y);
                 newNode   = [x y G(x,y) newF size(closedNodes, 1)];
                 openNodes = [openNodes; newNode];
                 plot(x, y, 'x', 'color', 'b')
@@ -166,13 +170,13 @@ while(~isempty(openNodes))
             end
             
             %if no better path, skip
-            if (newG >= G(x, y))
+            if (newG >= G(x,y))
                 continue
             end
             
             G(x,y) = newG;
-            newF   = newG + H(x, y);
-            openNodes(A,3:5) = [newG newF size(closedNodes, 1)];
+            newF   = newG + H(x,y);
+            openNodes(A, 3:5) = [newG newF size(closedNodes, 1)];
         end
     end
 end
@@ -187,7 +191,7 @@ if (solved)
         j    = closedNodes(j,5);
         path = [x, y; path];
     end
-    pathLength=0;
+    pathLength = 0;
     
     plot(path(1,1), path(1,2), 'o', 'color', 'r', 'MarkerFaceColor', 'r')
     for j = 2:size(path,1)

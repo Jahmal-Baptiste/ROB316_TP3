@@ -1,0 +1,17 @@
+Weight = 0
+	obstacles = 2
+		Path length = 75.3848
+		Elapsed time is 66.1144 seconds.
+		Path length = 75.3848
+		Elapsed time is 67.4252 seconds.
+		Path length = 77.0416
+		Elapsed time is 67.292 seconds.
+		Path length = 75.3848
+		Elapsed time is 69.7207 seconds.
+		Path length = 79.6274
+		Elapsed time is 67.3036 seconds.
+	obstacles = 5
+		Path length = 79.7279
+		Elapsed time is 65.0736 seconds.
+		Path length = 81.5269
+		Elapsed time is 66.4988 seconds.
