@@ -10,8 +10,70 @@ Weight = 0
 		Elapsed time is 69.7207 seconds.
 		Path length = 79.6274
 		Elapsed time is 67.3036 seconds.
+		
+		Average length = 76.5647
+		Average time = 67.5712
 	obstacles = 5
 		Path length = 79.7279
 		Elapsed time is 65.0736 seconds.
 		Path length = 81.5269
 		Elapsed time is 66.4988 seconds.
+		Path length = 81.0416
+		Elapsed time is 80.0257 seconds.
+		Path length = 76.2132
+		Elapsed time is 85.6311 seconds.
+		Path length = 75.3848
+		Elapsed time is 85.124 seconds.
+
+		Average length = 78.7789
+		Average time = 76.5106
+	obstacles = 10
+		Path length = 78.2132
+		Elapsed time is 83.1762 seconds.
+		Path length = 79.8701
+		Elapsed time is 79.8037 seconds.
+		Path length = 76.2132
+		Elapsed time is 66.7557 seconds.
+		Path length = 77.6274
+		Elapsed time is 62.9278 seconds.
+		Path length = 81.3848
+		Elapsed time is 49.7105 seconds.
+
+		Average length = 
+		Average time = 
+	obstacles = 20
+		Path length = 79.2843
+		Elapsed time is 58.8269 seconds.
+		Path length = 83.8701
+		Elapsed time is 59.758 seconds.
+		Path length = 78.6985
+		Elapsed time is 58.7166 seconds.
+		Path length = 76.2132
+		Elapsed time is 56.45 seconds.
+		Path length = 91.7696
+		Elapsed time is 56.6093 seconds.
+weight = 1.4
+	obstacles = 2
+		Path length = 77.8701
+		Elapsed time is 26.1036 seconds.
+		Path length = 77.0416
+		Elapsed time is 11.6913 seconds.
+		Path length = 77.0416
+		Elapsed time is 19.0647 seconds.
+		Path length = 77.0416
+		Elapsed time is 28.3777 seconds.
+		Path length = 77.8701
+		Elapsed time is 23.9467 seconds.
+	obstacles = 5
+		Path length = 75.3848
+		Elapsed time is 22.0371 seconds.
+		Path length = 79.5269
+		Elapsed time is 32.204 seconds.
+		Path length = 78.2132
+		Elapsed time is 23.0596 seconds.
+		Path length = 81.2843
+		Elapsed time is 46.6926 seconds.
+		Path length = 77.6274
+		Elapsed time is 26.442 seconds.
+	obstacles = 10
+

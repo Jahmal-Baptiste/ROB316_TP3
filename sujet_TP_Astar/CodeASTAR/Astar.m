@@ -26,7 +26,7 @@ MAP(60:62, 9:12) = inf;
 
 
 %To use Random Objects, uncomment this secion
-NumberOfObjects = 5;
+NumberOfObjects = 50;
 k = 0;
 while (k < NumberOfObjects)
     length = max(3,randi(9));
@@ -51,15 +51,12 @@ end
 
 tic
 %Compute Heuristic for each node%%%%%%%%%%%%%%%%%%%%%%%%%%%
-weight = 0;
-%weight_tab = bwdist(MAP, 'quasi-euclidean');
-
+weight = 3;
 
 for x = 1:size(MAP,1)
     for y = 1:size(MAP,2)
         if(MAP(x,y)~=inf)
             H(x,y) = weight*norm(goal-[x, y]);
-            %H(x,y) = weight./weight_tab(x, y)*norm(goal-[x, y]);
             G(x,y) = inf;
         end
     end
